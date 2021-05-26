@@ -19,10 +19,6 @@ Required Node.js
 */
 const Web3 = require('web3');
 
-let GETBLOCK_APIKEY = "27e2ea13-6c1d-4079-a1c4-d16772293d99";
-
-let providerUrl = `wss://bsc.getblock.io/mainnet/?api_key=${GETBLOCK_APIKEY}`;
-
 let pancakeSwapContract = "0x10ED43C718714eb63d5aA57B78B54704E256024E".toLowerCase();
 
 const web3 = new Web3( new Web3.providers.WebsocketProvider( providerUrl ) );
