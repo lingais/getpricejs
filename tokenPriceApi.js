@@ -20,8 +20,7 @@ Required Node.js
 const Web3 = require('web3');
 
 let pancakeSwapContract = "0x10ED43C718714eb63d5aA57B78B54704E256024E".toLowerCase();
-
-const web3 = new Web3( new Web3.providers.WebsocketProvider( providerUrl ) );
+const web3 = new Web3( YourProvider );
 
 (async () => {
 
