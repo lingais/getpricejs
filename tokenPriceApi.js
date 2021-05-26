@@ -29,7 +29,7 @@ const web3 = new Web3( new Web3.providers.WebsocketProvider( providerUrl ) );
 
 (async () => {
 
-    const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with your token
+    const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with the token addres that you want to know the price
     const BNBTokenAddress = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c' //BNB
 
     let router = await new web3.eth.Contract( pancakeSwapAbi, pancakeSwapContract );
