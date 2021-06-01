@@ -15,22 +15,12 @@ Required Node.js
 6. Create a file: tokenPrice.js
 7. Copy this text inside that file
 8. run: node tokenPrice.js
-------
-
-For the provider I use https://getblock.io/
-- Go to https://getblock.io/
-- Click 'Get API key' Button and register for an account
-- On your account page click 'Create new API kEY'
-- Enter a custom name
-- Now with the API key that is displayed on your account page you can create the provider as follow
 
 */
-let GETBLOCK_APIKEY = "API_KEY";
-let providerUrl = `wss://bsc.getblock.io/mainnet/?api_key=${GETBLOCK_APIKEY}`;
-let provider = new Web3.providers.WebsocketProvider( providerUrl );
+
 
 let pancakeSwapContract = "0x10ED43C718714eb63d5aA57B78B54704E256024E".toLowerCase();
-const web3 = new Web3( provider );
+const web3 = new Web3("https://bsc-dataseed1.binance.org");
 
 (async () => {
 
