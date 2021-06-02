@@ -21,23 +21,39 @@ Required Node.js
 
 let pancakeSwapContract = "0x10ED43C718714eb63d5aA57B78B54704E256024E".toLowerCase();
 const web3 = new Web3("https://bsc-dataseed1.binance.org");
+async function calcSell( tokensToSell, tokenAddres){
+    const web3 = new Web3("https://bsc-dataseed1.binance.org");
+    const BNBTokenAddress = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" //BNB
 
+    let tokenRouter = await new web3.eth.Contract( tokenAbi, tokenAddres );
+    let tokenDecimals = await tokenRouter.methods.decimals().call();
+    
+    tokensToSell = setDecimals(tokensToSell, tokenDecimals);
+    let amountOut;
+    try {
+        let router = await new web3.eth.Contract( pancakeSwapAbi, pancakeSwapContract );
+        amountOut = await router.methods.getAmountsOut(tokensToSell, [tokenAddres ,BNBTokenAddress]).call();
+        amountOut =  web3.utils.fromWei(amountOut[1]);
+    } catch (error) {}
+    
+    if(!amountOut) return 0;
+    return amountOut;
+}
+function setDecimals( number, decimals ){
+    number = number.toString();
+    let numberAbs = number.split('.')[0]
+    let numberDecimals = number.split('.')[1] ? number.split('.')[1] : '';
+    while( numberDecimals.length < decimals ){
+        numberDecimals += "0";
+    }
+    return numberAbs + numberDecimals;
+}
 (async () => {
 
-    const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with the token addres that you want to know the price
-    const BNBTokenAddress = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c' //BNB
+    const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with the token addres that you want to know the 
+    let priceInBnb = await calcSell(1, tokenAddres);
+    console.log( 'VALUE IN BNB : ' + priceInBnb + ' | Just convert it to USD ' );
 
-    let router = await new web3.eth.Contract( pancakeSwapAbi, pancakeSwapContract );
-    let token = await new web3.eth.Contract( tokenAbi, tokenAddres );
-    const amountIn = web3.utils.toWei("1", "ether") ;
-   
-    let tokenDecimals = await token.methods.decimals().call() ;
-
-    let amountOut = await router.methods.getAmountsOut(amountIn, [BNBTokenAddress, tokenAddres]).call();
-    amountOut =  parseFloat( amountOut[1] ) / (10**tokenDecimals) ;
-
-    let tokenValueInBnb = 1/amountOut
-    console.log( 'VALUE IN BNB : ' + tokenValueInBnb + ' | Just convert it to USD ' )
 })();
 
 
