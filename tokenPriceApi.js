@@ -39,6 +39,20 @@ async function calcSell( tokensToSell, tokenAddres){
     if(!amountOut) return 0;
     return amountOut;
 }
+async function calcBNBPrice(){
+    const web3 = new Web3("https://bsc-dataseed1.binance.org");
+    const BNBTokenAddress = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" //BNB
+    const USDTokenAddress  = "0x55d398326f99059fF775485246999027B3197955" //USDT
+    let bnbToSell = web3.utils.toWei("1", "ether") ;
+    let amountOut;
+    try {
+        let router = await new web3.eth.Contract( pancakeSwapAbi, pancakeSwapContract );
+        amountOut = await router.methods.getAmountsOut(bnbToSell, [BNBTokenAddress ,USDTokenAddress]).call();
+        amountOut =  web3.utils.fromWei(amountOut[1]);
+    } catch (error) {}
+    if(!amountOut) return 0;
+    return amountOut;
+}
 function setDecimals( number, decimals ){
     number = number.toString();
     let numberAbs = number.split('.')[0]
@@ -53,6 +67,8 @@ function setDecimals( number, decimals ){
     const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with the token addres that you want to know the 
     let priceInBnb = await calcSell(1, tokenAddres);
     console.log( 'VALUE IN BNB : ' + priceInBnb + ' | Just convert it to USD ' );
+    let bnbPrice = await price.calcBNBPrice()
+    console.log(`\n->BNB price: ${bnbPrice}`);
 
 })();
 
