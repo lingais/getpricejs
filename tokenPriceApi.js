@@ -63,13 +63,12 @@ function setDecimals( number, decimals ){
     return numberAbs + numberDecimals;
 }
 (async () => {
-
     const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with the token addres that you want to know the 
+    let bnbPrice = await calcBNBPrice()
+    console.log(`CURRENT BNB PRICE: ${bnbPrice}`);
     let priceInBnb = await calcSell(1, tokenAddres);
-    console.log( 'VALUE IN BNB : ' + priceInBnb + ' | Just convert it to USD ' );
-    let bnbPrice = await price.calcBNBPrice()
-    console.log(`\n->BNB price: ${bnbPrice}`);
-
+    console.log( 'SHIT_TOKEN VALUE IN BNB : ' + priceInBnb + ' | Just convert it to USD ' );
+    console.log(`SHIT_TOKEN VALUE IN USD: ${priceInBnb*bnbPrice}`);
 })();
 
 
