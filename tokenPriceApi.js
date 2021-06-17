@@ -72,7 +72,7 @@ function that was build to retrive the token prices
     const tokenAddres = '0xa49e44976c236beb51a1f818d49b9b9759ed97b1'; // change this with the token addres that you want to know the 
     let bnbPrice = await calcBNBPrice() // query pancakeswap to get the price of BNB in USDT
     console.log(`CURRENT BNB PRICE: ${bnbPrice}`);
-    let priceInBnb = await calcSell(1, tokenAddres); // query pacakeswap asking how much cost 1 token in BNB
+    let priceInBnb = await calcSell(1000000, tokenAddres)/1000000; // calculate TOKEN price in BNB, sometimes setting only 1 instead of 1000 cause errors
     console.log( 'SHIT_TOKEN VALUE IN BNB : ' + priceInBnb + ' | Just convert it to USD ' );
     console.log(`SHIT_TOKEN VALUE IN USD: ${priceInBnb*bnbPrice}`); // convert the token price from BNB to USD based on the retrived BNB value
 })();
