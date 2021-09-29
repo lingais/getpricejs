@@ -17,7 +17,7 @@ Required Node.js
 8. run: node tokenPrice.js
 
 -- Direct contact --
-https://t.me/Linch01
+https://www.reddit.com/user/Linch-1
 */
 
 
