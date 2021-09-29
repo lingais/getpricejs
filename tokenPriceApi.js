@@ -16,6 +16,8 @@ Required Node.js
 7. Copy this text inside that file
 8. run: node tokenPrice.js
 
+-- Direct contact --
+https://t.me/Linch01
 */
 
 
