@@ -4,6 +4,14 @@ const Web3 = require('web3');
 
 /*
 Required Node.js
+
+-- Web3 Token Charting --
+
+Checkout my repo about building a clone of poocoin/dextools on bsc/pancakeswap and on any other similar chain/dex
+
+https://github.com/Linch1/Web3TokenCharting
+
+
 -- Usage --
 
 1. Make a directory on your pc
